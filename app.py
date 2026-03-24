@@ -139,8 +139,20 @@ def admin_logout():
 @app.route('/admin')
 @admin_required
 def admin_dashboard():
-    orders = Order.query.order_by(Order.updated_at.desc()).all()
-    return render_template('admin_dashboard.html', orders=orders)
+    status_filter = request.args.get('status', '').strip()
+
+    query = Order.query
+
+    if status_filter:
+        query = query.filter(Order.status == status_filter)
+
+    orders = query.order_by(Order.updated_at.desc()).all()
+
+    return render_template(
+        'admin_dashboard.html',
+        orders=orders,
+        status_filter=status_filter
+    )
 
 
 @app.route('/admin/orders/new', methods=['GET', 'POST'])
