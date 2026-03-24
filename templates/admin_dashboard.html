@@ -58,10 +58,14 @@
         <p>No orders yet. Create your first one.</p>
     {% endif %}
 </section>
-{% endblock %}
 <script>
 function copyLink(link) {
-  navigator.clipboard.writeText(link);
-  alert("Tracking link copied!");
+  navigator.clipboard.writeText(link).then(function() {
+    alert("Tracking link copied!");
+  }).catch(function(err) {
+    alert("Could not copy link.");
+    console.error(err);
+  });
 }
 </script>
+{% endblock %}
