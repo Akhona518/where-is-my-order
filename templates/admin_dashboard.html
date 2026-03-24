@@ -4,6 +4,33 @@
     <div>
         <h1>Admin dashboard</h1>
         <p>Manage customer orders and update delivery progress.</p>
+        <form method="get" action="{{ url_for('admin_dashboard') }}" style="margin-top:14px; margin-bottom:14px; display:flex; gap:10px; flex-wrap:wrap;">
+  {% if status_filter %}
+    <input type="hidden" name="status" value="{{ status_filter }}">
+  {% endif %}
+
+  <input
+    type="text"
+    name="search"
+    value="{{ search or '' }}"
+    placeholder="Search by order #, tracking #, or customer"
+    style="padding:10px 14px; min-width:320px; border-radius:10px; border:1px solid #24324a; background:#0b1730; color:white;"
+  >
+
+  <button
+    type="submit"
+    style="padding:10px 14px; border:none; border-radius:10px; background:#22c55e; color:#04111f; font-weight:700; cursor:pointer;">
+    Search
+  </button>
+
+  {% if search %}
+    <a
+      href="{{ url_for('admin_dashboard', status=status_filter) }}"
+      style="padding:10px 14px; border-radius:10px; background:#1f2937; color:#e5e7eb; text-decoration:none;">
+      Clear
+    </a>
+  {% endif %}
+</form>
         <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; margin-bottom:18px;">
   <a href="{{ url_for('admin_dashboard') }}"
      style="padding:6px 12px; border-radius:999px; text-decoration:none; background:{% if not status_filter %}#22c55e{% else %}#1f2937{% endif %}; color:{% if not status_filter %}#04111f{% else %}#e5e7eb{% endif %};">
