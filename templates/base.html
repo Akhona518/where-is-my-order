@@ -9,7 +9,7 @@
 <body>
     <nav class="nav">
         <div class="container nav-inner">
-            <a href="{{ url_for('home') }}" class="brand">Trackly</a>
+            <a href="{{ url_for('home') }}" class="brand"><span style="color:#22c55e;">●</span> Trackly</a>
             <div class="nav-links">
                 <a href="{{ url_for('track_order') }}">Track</a>
                 {% if session.get('is_admin') %}
