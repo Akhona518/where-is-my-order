@@ -4,6 +4,31 @@
     <div>
         <h1>Admin dashboard</h1>
         <p>Manage customer orders and update delivery progress.</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; margin-bottom:18px;">
+  <a href="{{ url_for('admin_dashboard') }}"
+     style="padding:6px 12px; border-radius:999px; text-decoration:none; background:{% if not status_filter %}#22c55e{% else %}#1f2937{% endif %}; color:{% if not status_filter %}#04111f{% else %}#e5e7eb{% endif %};">
+    All
+  </a>
+
+  <a href="{{ url_for('admin_dashboard', status='In transit') }}"
+     style="padding:6px 12px; border-radius:999px; text-decoration:none; background:{% if status_filter == 'In transit' %}#22c55e{% else %}#1f2937{% endif %}; color:{% if status_filter == 'In transit' %}#04111f{% else %}#e5e7eb{% endif %};">
+    In transit
+  </a>
+
+  <a href="{{ url_for('admin_dashboard', status='Out for delivery') }}"
+     style="padding:6px 12px; border-radius:999px; text-decoration:none; background:{% if status_filter == 'Out for delivery' %}#22c55e{% else %}#1f2937{% endif %}; color:{% if status_filter == 'Out for delivery' %}#04111f{% else %}#e5e7eb{% endif %};">
+    Out for delivery
+  </a>
+
+  <a href="{{ url_for('admin_dashboard', status='Delivered') }}"
+     style="padding:6px 12px; border-radius:999px; text-decoration:none; background:{% if status_filter == 'Delivered' %}#22c55e{% else %}#1f2937{% endif %}; color:{% if status_filter == 'Delivered' %}#04111f{% else %}#e5e7eb{% endif %};">
+    Delivered
+  </a>
+
+  <a href="{{ url_for('admin_dashboard', status='Delayed') }}"
+     style="padding:6px 12px; border-radius:999px; text-decoration:none; background:{% if status_filter == 'Delayed' %}#22c55e{% else %}#1f2937{% endif %}; color:{% if status_filter == 'Delayed' %}#04111f{% else %}#e5e7eb{% endif %};">
+    Delayed
+  </a>
     </div>
     <a href="{{ url_for('create_order') }}" class="btn">+ New order</a>
 </section>
