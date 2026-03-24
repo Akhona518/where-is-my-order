@@ -88,6 +88,30 @@ def track_order():
         order = Order.query.filter(
             (Order.order_number == query) | (Order.tracking_number == query)
         ).first()
+
+        if not order:
+            flash("No order was found with that order number or tracking number.", "error")
+
+    return render_template('track.html', order=order, query=query)
+
+
+@app.route("/track/<tracking_number>")
+def track_order_direct(tracking_number):
+    order = Order.query.filter_by(tracking_number=tracking_number).first()
+
+    if not order:
+        flash("No order was found for that tracking number.", "error")
+        return redirect(url_for("track_order"))
+
+    return render_template("track.html", order=order, query=tracking_number)
+def track_order():
+    query = request.form.get('query', '').strip() if request.method == 'POST' else request.args.get('query', '').strip()
+    order = None
+
+    if query:
+        order = Order.query.filter(
+            (Order.order_number == query) | (Order.tracking_number == query)
+        ).first()
         if not order:
             flash('No order was found with that order number or tracking number.', 'error')
 
