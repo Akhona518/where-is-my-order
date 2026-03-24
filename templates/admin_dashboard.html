@@ -31,24 +31,22 @@
                         <td>{{ order.courier or '-' }}</td>
                         <td>{{ order.updated_at.strftime('%d %b %Y %H:%M') }}</td>
                         <td class="actions-cell">
-                          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
 
-  <a href="{{ url_for('track_order', query=order.order_number) }}"
-     style="padding:4px 10px; border-radius:6px; background:#1f2937; color:#e5e7eb; text-decoration:none;">
-    View
-  </a>
+  <a ...>View</a>
+  <a ...>Edit</a>
+  <button ...>Copy</button>
 
-  <a href="{{ url_for('edit_order', order_id=order.id) }}"
-     style="padding:4px 10px; border-radius:6px; background:#374151; color:#e5e7eb; text-decoration:none;">
-    Edit
-  </a>
+  <small style="color:#9ca3af;">
+    /track/{{ order.tracking_number }}
+  </small>
 
-  <button
-    type="button"
-    onclick="copyLink('{{ request.host_url }}track/{{ order.tracking_number }}', this)"
-    style="padding:4px 10px; border-radius:6px; border:none; background:#22c55e; color:#04111f; cursor:pointer;">
-    Copy
-  </button>
+  <form method="post" action="{{ url_for('delete_order', order_id=order.id) }}" onsubmit="return confirm('Delete this order?');">
+    <button type="submit"
+      style="padding:4px 10px; border-radius:6px; border:none; background:#ef4444; color:white; cursor:pointer;">
+      Delete
+    </button>
+  </form>
 
 </div>
 
