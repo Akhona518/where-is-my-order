@@ -15,7 +15,7 @@ Trusted by growing businesses to manage deliveries and customer expectations.
             <a class="btn" href="{{ url_for('track_order') }}">Track your order</a>
             <a class="btn btn-secondary" href="{{ url_for('admin_login') }}">Business Dashboard</a>
         </div>
-        <form action="{{ url_for('track_order') }}" method="get" style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <form action="{{ url_for('track_order') }}" method="post" style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
     <input
         type="text"
         name="query"
