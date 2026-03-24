@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Where Is My Order?</title>
+    <title>Trackly</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <nav class="nav">
         <div class="container nav-inner">
-            <a href="{{ url_for('home') }}" class="brand">Where Is My Order?</a>
+            <a href="{{ url_for('home') }}" class="brand">Trackly</a>
             <div class="nav-links">
                 <a href="{{ url_for('track_order') }}">Track</a>
                 {% if session.get('is_admin') %}
