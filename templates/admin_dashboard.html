@@ -45,7 +45,7 @@
 
   <button
     type="button"
-    onclick="copyLink('{{ request.host_url }}track/{{ order.tracking_number }}')"
+    onclick="copyLink('{{ request.host_url }}track/{{ order.tracking_number }}', this)"
     style="padding:4px 10px; border-radius:6px; border:none; background:#22c55e; color:#04111f; cursor:pointer;">
     Copy
   </button>
@@ -72,13 +72,16 @@
     {% endif %}
 </section>
 <script>
-function copyLink(link) {
-  navigator.clipboard.writeText(link).then(function() {
-    alert("Tracking link copied!");
-  }).catch(function(err) {
-    alert("Could not copy link.");
-    console.error(err);
-  });
+<script>
+function copyLink(link, btn) {
+  navigator.clipboard.writeText(link);
+
+  const originalText = btn.innerText;
+  btn.innerText = "Copied!";
+  
+  setTimeout(() => {
+    btn.innerText = originalText;
+  }, 1500);
 }
 </script>
 {% endblock %}
