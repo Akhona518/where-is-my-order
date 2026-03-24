@@ -140,18 +140,27 @@ def admin_logout():
 @admin_required
 def admin_dashboard():
     status_filter = request.args.get('status', '').strip()
+    search = request.args.get('search', '').strip()
 
     query = Order.query
 
     if status_filter:
         query = query.filter(Order.status == status_filter)
 
+    if search:
+        query = query.filter(
+            (Order.order_number.ilike(f"%{search}%")) |
+            (Order.tracking_number.ilike(f"%{search}%")) |
+            (Order.customer_name.ilike(f"%{search}%"))
+        )
+
     orders = query.order_by(Order.updated_at.desc()).all()
 
     return render_template(
         'admin_dashboard.html',
         orders=orders,
-        status_filter=status_filter
+        status_filter=status_filter,
+        search=search
     )
 
 
