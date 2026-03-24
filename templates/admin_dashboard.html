@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-header page-header-row">
+    <div>
+        <h1>Admin dashboard</h1>
+        <p>Manage customer orders and update delivery progress.</p>
+    </div>
+    <a href="{{ url_for('create_order') }}" class="btn">+ New order</a>
+</section>
+
+<section class="card">
+    {% if orders %}
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Customer</th>
+                        <th>Status</th>
+                        <th>Courier</th>
+                        <th>Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.order_number }}</td>
+                        <td>{{ order.customer_name }}</td>
+                        <td>{{ order.status }}</td>
+                        <td>{{ order.courier or '-' }}</td>
+                        <td>{{ order.updated_at.strftime('%d %b %Y %H:%M') }}</td>
+                        <td class="actions-cell">
+                            <a href="{{ url_for('track_order', query=order.order_number) }}">View</a>
+                            <a href="{{ url_for('edit_order', order_id=order.id) }}">Edit</a>
+                            <form method="post" action="{{ url_for('delete_order', order_id=order.id) }}" onsubmit="return confirm('Delete this order?');">
+                                <button type="submit" class="link-button danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No orders yet. Create your first one.</p>
+    {% endif %}
+</section>
+{% endblock %}

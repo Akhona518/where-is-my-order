@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-header">
+    <h1>{{ 'Edit order' if order else 'Create order' }}</h1>
+    <p>{{ 'Update order details and add tracking events.' if order else 'Add a new order for customers to track.' }}</p>
+</section>
+
+<form method="post" class="card form-card">
+    <div class="form-grid">
+        <div>
+            <label>Order number</label>
+            <input type="text" name="order_number" value="{{ order.order_number if order else '' }}" required>
+        </div>
+        <div>
+            <label>Tracking number</label>
+            <input type="text" name="tracking_number" value="{{ order.tracking_number if order and order.tracking_number else '' }}">
+        </div>
+        <div>
+            <label>Customer name</label>
+            <input type="text" name="customer_name" value="{{ order.customer_name if order else '' }}" required>
+        </div>
+        <div>
+            <label>Customer email</label>
+            <input type="email" name="customer_email" value="{{ order.customer_email if order else '' }}" required>
+        </div>
+        <div>
+            <label>Courier</label>
+            <input type="text" name="courier" value="{{ order.courier if order and order.courier else '' }}">
+        </div>
+        <div>
+            <label>Status</label>
+            <select name="status">
+                {% for status in statuses %}
+                    <option value="{{ status }}" {% if order and order.status == status %}selected{% endif %}>{{ status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Last location</label>
+            <input type="text" name="last_location" value="{{ order.last_location if order and order.last_location else '' }}">
+        </div>
+        <div>
+            <label>Estimated arrival</label>
+            <input type="text" name="eta" placeholder="e.g. Tomorrow before 17:00" value="{{ order.eta if order and order.eta else '' }}">
+        </div>
+    </div>
+
+    <div>
+        <label>Notes</label>
+        <textarea name="notes" rows="4">{{ order.notes if order and order.notes else '' }}</textarea>
+    </div>
+
+    {% if order %}
+    <hr>
+    <h3>Add a new tracking event</h3>
+    <p class="muted">Optional. If left blank, a status-change event will be added automatically when the status changes.</p>
+    <div class="form-grid">
+        <div>
+            <label>Event title</label>
+            <input type="text" name="event_title" placeholder="e.g. Arrived at regional hub">
+        </div>
+        <div>
+            <label>Event description</label>
+            <input type="text" name="event_description" placeholder="e.g. Parcel scanned into Cape Town depot">
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="actions">
+        <button type="submit" class="btn">{{ 'Save changes' if order else 'Create order' }}</button>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Back</a>
+    </div>
+</form>
+{% endblock %}

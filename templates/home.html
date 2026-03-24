@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">Simple order tracking MVP</p>
+        <h1>Let customers check their order status without contacting support.</h1>
+        <p class="subtext">
+            Search by order number or tracking number, see the latest delivery status, and follow the full order journey.
+        </p>
+        <div class="actions">
+            <a class="btn" href="{{ url_for('track_order') }}">Track an order</a>
+            <a class="btn btn-secondary" href="{{ url_for('admin_login') }}">Admin panel</a>
+        </div>
+    </div>
+</section>
+
+<section class="card-grid">
+    <article class="card">
+        <h3>For customers</h3>
+        <p>Find updates in seconds with a clean public tracking page.</p>
+    </article>
+    <article class="card">
+        <h3>For businesses</h3>
+        <p>Create and update orders from a lightweight admin dashboard.</p>
+    </article>
+    <article class="card">
+        <h3>For your MVP</h3>
+        <p>Ready to run locally and easy to extend with real courier APIs later.</p>
+    </article>
+</section>
+{% endblock %}

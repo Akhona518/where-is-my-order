@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-header">
+    <h1>Track your order</h1>
+    <p>Enter your order number or tracking number below.</p>
+</section>
+
+<form method="post" class="search-box card">
+    <input type="text" name="query" placeholder="e.g. AKH12345 or TRK987654" value="{{ query }}" required>
+    <button type="submit" class="btn">Track</button>
+</form>
+
+{% if order %}
+<section class="card order-summary">
+    <div class="summary-row">
+        <div>
+            <p class="label">Order number</p>
+            <p class="value">{{ order.order_number }}</p>
+        </div>
+        <div>
+            <p class="label">Tracking number</p>
+            <p class="value">{{ order.tracking_number or 'Not assigned yet' }}</p>
+        </div>
+        <div>
+            <p class="label">Current status</p>
+            <p class="value status-pill">{{ order.status }}</p>
+        </div>
+    </div>
+
+    <div class="summary-row">
+        <div>
+            <p class="label">Courier</p>
+            <p class="value">{{ order.courier or 'Pending' }}</p>
+        </div>
+        <div>
+            <p class="label">Last known location</p>
+            <p class="value">{{ order.last_location or 'No location update yet' }}</p>
+        </div>
+        <div>
+            <p class="label">Estimated arrival</p>
+            <p class="value">{{ order.eta or 'Not available yet' }}</p>
+        </div>
+    </div>
+
+    {% if order.notes %}
+    <div class="notes-box">
+        <p class="label">Notes</p>
+        <p>{{ order.notes }}</p>
+    </div>
+    {% endif %}
+</section>
+
+<section class="card">
+    <h2>Tracking history</h2>
+    <div class="timeline">
+        {% for event in order.history %}
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>{{ event.event_title }}</h3>
+                    <p class="muted">{{ event.event_time.strftime('%d %b %Y %H:%M') }}</p>
+                    {% if event.location %}<p><strong>Location:</strong> {{ event.location }}</p>{% endif %}
+                    {% if event.description %}<p>{{ event.description }}</p>{% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}

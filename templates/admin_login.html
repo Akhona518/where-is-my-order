@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-header">
+    <h1>Admin login</h1>
+    <p>Use the admin password to manage orders.</p>
+</section>
+
+<form method="post" class="card form-card narrow">
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter admin password" required>
+    <button type="submit" class="btn">Login</button>
+</form>
+{% endblock %}
