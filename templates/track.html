@@ -145,44 +145,6 @@
         </div>
     {% endif %}
 </section>
-
-      <div style="
-        width:14px;
-        height:14px;
-        border-radius:50%;
-        background:
-          {% if step_index < current_index %}
-            #22c55e
-          {% elif step_index == current_index %}
-            #10b981
-          {% else %}
-            #374151
-          {% endif %};
-      "></div>
-
-      <!-- TEXT -->
-      <div style="
-        font-size:14px;
-        color:
-          {% if step_index <= current_index %}
-            #e5e7eb
-          {% else %}
-            #6b7280
-          {% endif %};
-        font-weight:
-          {% if step_index == current_index %}
-            700
-          {% else %}
-            400
-          {% endif %};
-      ">
-        {{ step }}
-      </div>
-
-    </div>
-  {% endfor %}
-
-</div>
     <div class="timeline">
         {% for event in order.history %}
             <div class="timeline-item">
