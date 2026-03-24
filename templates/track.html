@@ -82,6 +82,69 @@
 </section>
 
 <section class="card">
+    <section class="card" style="margin-top: 24px;">
+    <h2 style="margin-bottom: 18px;">Delivery progress</h2>
+
+    {% set steps = [
+        'Order received',
+        'Payment confirmed',
+        'Packed',
+        'Awaiting courier pickup',
+        'In transit',
+        'Out for delivery',
+        'Delivered'
+    ] %}
+
+    {% set current_index = steps.index(order.status) if order.status in steps else -1 %}
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+        {% for step in steps %}
+            {% set step_index = loop.index0 %}
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 999px;
+                    display: inline-block;
+                    {% if step_index < current_index %}
+                        background: #22c55e;
+                    {% elif step_index == current_index %}
+                        background: #3b82f6;
+                        box-shadow: 0 0 0 4px rgba(59,130,246,0.18);
+                    {% else %}
+                        background: #334155;
+                    {% endif %}
+                "></span>
+
+                <span style="
+                    font-weight: 600;
+                    {% if step_index < current_index %}
+                        color: #22c55e;
+                    {% elif step_index == current_index %}
+                        color: #ffffff;
+                    {% else %}
+                        color: #94a3b8;
+                    {% endif %}
+                ">
+                    {{ step }}
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if order.status in ['Delayed', 'Cancelled'] %}
+        <div style="
+            margin-top: 18px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(239,68,68,0.12);
+            color: #fca5a5;
+            border: 1px solid rgba(239,68,68,0.35);
+        ">
+            This order is currently marked as <strong>{{ order.status }}</strong>.
+        </div>
+    {% endif %}
+</section>
     <h2>Tracking history</h2>
     <div class="timeline">
         {% for event in order.history %}
