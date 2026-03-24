@@ -104,7 +104,6 @@ def track_order_direct(tracking_number):
         return redirect(url_for("track_order"))
 
     return render_template("track.html", order=order, query=tracking_number)
-def track_order():
     query = request.form.get('query', '').strip() if request.method == 'POST' else request.args.get('query', '').strip()
     order = None
 
