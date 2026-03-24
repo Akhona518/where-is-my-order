@@ -145,28 +145,7 @@
         </div>
     {% endif %}
 </section>
-    <h2>Tracking progress</h2>
 
-<div style="display:flex; flex-direction:column; gap:14px; margin-top:20px;">
-
-  {% set steps = [
-    "Order received",
-    "Payment confirmed",
-    "Packed",
-    "Awaiting courier pickup",
-    "In transit",
-    "Out for delivery",
-    "Delivered"
-  ] %}
-
-  {% set current_index = steps.index(order.status) if order.status in steps else -1 %}
-
-  {% for step in steps %}
-    {% set step_index = loop.index0 %}
-
-    <div style="display:flex; align-items:center; gap:12px;">
-
-      <!-- DOT -->
       <div style="
         width:14px;
         height:14px;
