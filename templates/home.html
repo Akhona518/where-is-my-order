@@ -15,6 +15,20 @@ Trusted by growing businesses to manage deliveries and customer expectations.
             <a class="btn" href="{{ url_for('track_order') }}">Track your order</a>
             <a class="btn btn-secondary" href="{{ url_for('admin_login') }}">Business Dashboard</a>
         </div>
+        <form action="{{ url_for('track_order') }}" method="get" style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
+    <input
+        type="text"
+        name="query"
+        placeholder="Enter order number or tracking number"
+        style="padding: 14px 16px; min-width: 320px; border-radius: 12px; border: 1px solid #24324a; background: #0b1730; color: white;"
+    >
+    <button
+        type="submit"
+        style="padding: 14px 20px; border: none; border-radius: 12px; background: #22c55e; color: #04111f; font-weight: 700; cursor: pointer;"
+    >
+        Track Now
+    </button>
+</form>
     </div>
 </section>
 
