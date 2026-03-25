@@ -12,48 +12,57 @@
 
 {% if order %}
 <section class="card order-summary">
-    <div class="summary-row"><div>
-  <p class="label">Last updated</p>
-  <p class="value">{{ order.updated_at.strftime('%d %b %Y %H:%M') }}</p>
-</div>
-        <div>
-          <p class="label">Order ID</p>
-<p class="label">Tracking ID</p>
-<p class="label">Latest status</p>
-            <p class="value">
-    <span style="
+<div class="summary-row">
+  <div>
+    <p class="label">Order ID</p>
+    <p class="value">{{ order.order_number }}</p>
+  </div>
+
+  <div>
+    <p class="label">Tracking ID</p>
+    <p class="value">{{ order.tracking_number or 'Not assigned yet' }}</p>
+  </div>
+
+  <div>
+    <p class="label">Latest status</p>
+    <p class="value">
+      <span style="
         padding: 6px 12px;
         border-radius: 999px;
         font-size: 13px;
         font-weight: 600;
-
         {% if order.status == 'Delivered' %}
-            background: #22c55e; color: #04111f;
+          background: #22c55e; color: #04111f;
         {% elif order.status == 'Out for delivery' %}
-            background: #3b82f6; color: white;
+          background: #3b82f6; color: white;
         {% elif order.status == 'In transit' %}
-            background: #6366f1; color: white;
+          background: #6366f1; color: white;
         {% elif order.status == 'Packed' %}
-            background: #06b6d4; color: #04111f;
+          background: #06b6d4; color: #04111f;
         {% elif order.status == 'Payment confirmed' %}
-            background: #10b981; color: #04111f;
+          background: #10b981; color: #04111f;
         {% elif order.status == 'Order received' %}
-            background: #94a3b8; color: #04111f;
+          background: #94a3b8; color: #04111f;
         {% elif order.status == 'Awaiting courier pickup' %}
-            background: #f59e0b; color: #04111f;
+          background: #f59e0b; color: #04111f;
         {% elif order.status == 'Delayed' %}
-            background: #f97316; color: white;
+          background: #f97316; color: white;
         {% elif order.status == 'Cancelled' %}
-            background: #ef4444; color: white;
+          background: #ef4444; color: white;
         {% else %}
-            background: #334155; color: white;
+          background: #334155; color: white;
         {% endif %}
-    ">
+      ">
         {{ order.status }}
-    </span>
-</p>
-        </div>
-    </div>
+      </span>
+    </p>
+  </div>
+
+  <div>
+    <p class="label">Last updated</p>
+    <p class="value">{{ order.updated_at.strftime('%d %b %Y %H:%M') }}</p>
+  </div>
+</div>
 
     <div class="summary-row">
         <div>
