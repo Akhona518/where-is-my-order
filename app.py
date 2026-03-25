@@ -154,23 +154,25 @@ def admin_dashboard():
             (Order.customer_name.ilike(f"%{search}%"))
         )
 
-           orders = query.order_by(Order.updated_at.desc()).all()
-           all_count = Order.query.count()
-        in_transit_count = Order.query.filter_by(status='In transit').count()
-       out_for_delivery_count = Order.query.filter_by(status='Out for delivery').count()
-       delivered_count = Order.query.filter_by(status='Delivered').count()
+    orders = query.order_by(Order.updated_at.desc()).all()
+
+    all_count = Order.query.count()
+    in_transit_count = Order.query.filter_by(status='In transit').count()
+    out_for_delivery_count = Order.query.filter_by(status='Out for delivery').count()
+    delivered_count = Order.query.filter_by(status='Delivered').count()
     delayed_count = Order.query.filter_by(status='Delayed').count()
-     return render_template(
-    'admin_dashboard.html',
-    orders=orders,
-    status_filter=status_filter,
-    search=search,
-    all_count=all_count,
-    in_transit_count=in_transit_count,
-    out_for_delivery_count=out_for_delivery_count,
-    delivered_count=delivered_count,
-    delayed_count=delayed_count
-)
+
+    return render_template(
+        'admin_dashboard.html',
+        orders=orders,
+        status_filter=status_filter,
+        search=search,
+        all_count=all_count,
+        in_transit_count=in_transit_count,
+        out_for_delivery_count=out_for_delivery_count,
+        delivered_count=delivered_count,
+        delayed_count=delayed_count
+    )
 
 @app.route('/admin/orders/new', methods=['GET', 'POST'])
 @admin_required
