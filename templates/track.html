@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="page-header">
-    <h1>Track your order</h1>
-    <p>Enter your order number or tracking number below.</p>
+  <h1>Track your delivery</h1>
+  <p>Enter your order number or tracking number to see the latest delivery updates.</p>
 </section>
 
 <form method="post" class="search-box card">
@@ -12,17 +12,14 @@
 
 {% if order %}
 <section class="card order-summary">
-    <div class="summary-row">
+    <div class="summary-row"><div>
+  <p class="label">Last updated</p>
+  <p class="value">{{ order.updated_at.strftime('%d %b %Y %H:%M') }}</p>
+</div>
         <div>
-            <p class="label">Order number</p>
-            <p class="value">{{ order.order_number }}</p>
-        </div>
-        <div>
-            <p class="label">Tracking number</p>
-            <p class="value">{{ order.tracking_number or 'Not assigned yet' }}</p>
-        </div>
-        <div>
-            <p class="label">Current status</p>
+          <p class="label">Order ID</p>
+<p class="label">Tracking ID</p>
+<p class="label">Latest status</p>
             <p class="value">
     <span style="
         padding: 6px 12px;
