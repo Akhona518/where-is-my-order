@@ -107,7 +107,13 @@
    style="padding:4px 10px; border-radius:6px; background:#25D366; color:#04111f; text-decoration:none;">
   📲 WhatsApp
 </a>
-      <a href="mailto:?subject={{ ('Your order ' ~ order.order_number ~ ' update')|urlencode }}&body={{ ('Hi ' ~ order.customer_name ~ ',' ~ '\n\n' ~ 'Your order ' ~ order.order_number ~ ' is now ' ~ order.status ~ '.' ~ '\n\n' ~ 'Track it here: ' ~ request.host_url ~ 'track/' ~ order.tracking_number)|urlencode }}"
+      <a href="mailto:?subject={{ ('Your order ' ~ order.order_number ~ ' update')|urlencode }}&body={{ ('Hi ' ~ order.customer_name ~ ',' ~ '\n\n'
+~ 'Your order ' ~ order.order_number ~ ' is currently: ' ~ order.status ~ '.' ~ '\n\n'
+~ 'You can track your order here:' ~ '\n'
+~ request.host_url ~ 'track/' ~ order.tracking_number ~ '\n\n'
+~ 'If you have any questions, feel free to reply to this email.' ~ '\n\n'
+~ 'Thanks for your order!' ~ '\n'
+~ '— Trackly Team')|urlencode }}
    style="padding:4px 10px; border-radius:6px; background:#1f2937; color:#e5e7eb; text-decoration:none;"
   Email
 </a>
