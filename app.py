@@ -155,13 +155,11 @@ def admin_dashboard():
         )
 
 orders = query.order_by(Order.updated_at.desc()).all()
-
 all_count = Order.query.count()
 in_transit_count = Order.query.filter_by(status='In transit').count()
 out_for_delivery_count = Order.query.filter_by(status='Out for delivery').count()
 delivered_count = Order.query.filter_by(status='Delivered').count()
 delayed_count = Order.query.filter_by(status='Delayed').count()
-
 return render_template(
     'admin_dashboard.html',
     orders=orders,
@@ -173,7 +171,6 @@ return render_template(
     delivered_count=delivered_count,
     delayed_count=delayed_count
 )
-
 
 @app.route('/admin/orders/new', methods=['GET', 'POST'])
 @admin_required
